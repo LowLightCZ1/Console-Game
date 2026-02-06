@@ -1,0 +1,34 @@
+*{
+    font-family: inter;
+}
+
+::-webkit-scrollbar{
+  width: 0px;
+}
+
+body{
+    background-color: #555;
+    height: 100vh;
+    width: 100%;
+    margin: 0;
+}
+
+.main-container{
+    height: 100%;
+    width: auto;
+    display: grid;
+    grid-template-columns: [start-col] 5fr [start-console] 50fr [end-console] 5fr [end-col];
+    grid-template-rows: [start-row] 6fr [game-field] 1fr [console-field];
+}
+
+.game-field{
+    display: grid;
+    grid-column: start-col / end-col;
+    grid-row: start-row / game-field;
+    
+}
+
+.console-field{
+    grid-row: game-field / console-field ;
+    grid-column: start-console / end-console;
+}
