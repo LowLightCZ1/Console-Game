@@ -25,10 +25,20 @@ body{
     display: grid;
     grid-column: start-col / end-col;
     grid-row: start-row / game-field;
-    
+
 }
 
 .console-field{
     grid-row: game-field / console-field ;
     grid-column: start-console / end-console;
+}
+
+.console-text{
+    resize: none;
+    height: 100% !important;
+    width: 100% !important;
+}
+
+.console-text[type = "text"]{
+    text-align: start;
 }
