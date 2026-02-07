@@ -11,6 +11,7 @@ body{
     height: 100vh;
     width: 100%;
     margin: 0;
+    padding: 0;
 }
 
 .main-container{
@@ -21,22 +22,37 @@ body{
     grid-template-rows: [start-row] 6fr [game-field] 1fr [console-field];
 }
 
-.game-field{
-    display: grid;
+/*------GAME FIELD-------*/
+.game-container{
+    height: 100%;
+    width: 100%;
     grid-column: start-col / end-col;
     grid-row: start-row / game-field;
-
 }
 
+.game-field{
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr [game-col]);
+    grid-template-rows: repeat(5, 1fr [game-row]);
+}   
+
+
+/* ------CONSOLE FIELD-------*/
 .console-field{
+    width: 100%;
+    height: 100%;
     grid-row: game-field / console-field ;
     grid-column: start-console / end-console;
 }
 
 .console-text{
     resize: none;
-    height: 100% !important;
-    width: 100% !important;
+    height: 100% ;
+    width: 100% ;
+    padding-right: 0;
+    padding-bottom: 0;
 }
 
 .console-text[type = "text"]{
