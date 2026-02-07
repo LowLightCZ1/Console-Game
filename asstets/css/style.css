@@ -2,9 +2,13 @@
     font-family: inter;
 }
 
-::-webkit-scrollbar{
-  width: 0px;
+*, *::before, *::after {
+    box-sizing: border-box; 
 }
+
+/* ::-webkit-scrollbar{
+  width: 0px;
+} */
 
 body{
     background-color: #555;
@@ -17,9 +21,6 @@ body{
 .main-container{
     height: 100%;
     width: auto;
-    display: grid;
-    grid-template-columns: [start-col] 5fr [start-console] 50fr [end-console] 5fr [end-col];
-    grid-template-rows: [start-row] 6fr [game-field] 1fr [console-field];
 }
 
 /*------GAME FIELD-------*/
@@ -34,27 +35,48 @@ body{
     height: 100%;
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(10, 1fr [game-col]);
-    grid-template-rows: repeat(5, 1fr [game-row]);
+    grid-template-columns: repeat(10, 0.5fr [game-col]);
+    grid-template-rows: repeat(5, 0.5fr [game-row]);
 }   
+
+
+#gameCanvas{
+    grid-column: 1 / -1; /*For all cols*/
+    grid-row: 1 / -1; /*For all rows*/
+    height: 100%;
+    width: 100%;
+    z-index: 100;
+    image-rendering: pixelated;
+    background-color: #109703;
+}
+
+
 
 
 /* ------CONSOLE FIELD-------*/
 .console-field{
-    width: 100%;
-    height: 100%;
-    grid-row: game-field / console-field ;
-    grid-column: start-console / end-console;
+    position: fixed;
+    top: 807px;
+    left: 520px;
+    width: 800px;
+    height: 150px;
+    z-index: 101;
 }
 
 .console-text{
     resize: none;
     height: 100% ;
     width: 100% ;
-    padding-right: 0;
-    padding-bottom: 0;
+    border: 10px solid transparent;
+    border-image: url("../items/banner/Console-baner.png") 50 round;
+}
+
+.console-text:focus{
+    outline: none;
+    outline-offset: 0;
 }
 
 .console-text[type = "text"]{
     text-align: start;
+    
 }
