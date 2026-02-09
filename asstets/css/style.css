@@ -2,13 +2,20 @@
     font-family: inter;
 }
 
+@font-face {
+  font-family: 'minecraft';
+  src: url('../font/minecraft.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 *, *::before, *::after {
     box-sizing: border-box; 
 }
 
-/* ::-webkit-scrollbar{
+::-webkit-scrollbar{
   width: 0px;
-} */
+} 
 
 body{
     background-color: #555;
@@ -47,7 +54,7 @@ body{
     width: 100%;
     z-index: 100;
     image-rendering: pixelated;
-    background-color: #109703;
+    background-color: #474747;
 }
 
 
@@ -56,7 +63,7 @@ body{
 /* ------CONSOLE FIELD-------*/
 .console-field{
     position: fixed;
-    top: 807px;
+    top: 800px;
     left: 520px;
     width: 800px;
     height: 150px;
@@ -64,11 +71,28 @@ body{
 }
 
 .console-text{
+    position: relative;
     resize: none;
     height: 100% ;
     width: 100% ;
     border: 10px solid transparent;
-    border-image: url("../items/banner/Console-baner.png") 50 round;
+    border-image: url("../items/banner/Console-baner.png") 20 round;
+    background-color: transparent;
+    z-index: 101;
+    color: #0b8800;
+    font-size: medium;
+    font-family: 'minecraft';
+}
+
+.text-bg{
+    position: fixed;
+    top: 807px;
+    left: 528px;
+    width: 785px;
+    height: 135px;
+    background-color: #000;
+    z-index: 100;
+
 }
 
 .console-text:focus{
@@ -78,5 +102,4 @@ body{
 
 .console-text[type = "text"]{
     text-align: start;
-    
 }
