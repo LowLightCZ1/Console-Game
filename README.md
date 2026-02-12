@@ -18,4 +18,16 @@ Virtuální svět může představovat například herní prostředí, technick�
 
 Cílem projektu je pochopení principů návrhu univerzálního rozhraní, práce s příkazovým systémem a oddělení jednotlivých vrstev aplikace. Důležitou součástí je také čitelnost a struktura kódu, aby bylo řešení dlouhodobě udržitelné a připravené na další rozšiřování.
 
-Projekt tak slouží jako základ pro tvorbu obecného ovládacího systému, který může být využit v různých typech simulací a aplikací.
+---
+
+## Použité technologie
+
+Projekt je v současné fázi realizován pomocí následujících technologií:
+
+- **HTML5** – struktura aplikace a vytvoření rozhraní (herní plocha a konzole)
+- **CSS3** – stylování aplikace, rozložení prvků a vizuální podoba konzole
+- **JavaScript (ES6+)** – aplikační logika, zpracování příkazů, práce s objekty a řízení virtuálního světa
+
+K vykreslování vizuální části světa je využíván **HTML5 Canvas**, který umožňuje dynamické zobrazování objektů a jejich změn v reálném čase.
+
+Do budoucna je možné projekt dále rozšířit například o práci se serverem, ukládání dat nebo pokročilejší uživatelské rozhraní.
