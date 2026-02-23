@@ -52,8 +52,9 @@ body{
     grid-row: 1 / -1; /*For all rows*/
     z-index: 100;
     image-rendering: pixelated;
-    background-color: transparent;
+    background-color: transparent !important;
     pointer-events: none;
+    margin: 0;
 }
 
 

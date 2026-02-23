@@ -2,6 +2,7 @@ const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 const gameField = document.getElementById("gameField");
 
+
 const cellW = 192;
 const cellH = 240;
 const spriteW = 32; 
@@ -18,24 +19,41 @@ const test_figure = {
     pixelY: 0,
     targetX: 0,
     targetY: 0,
-    frame: 0,
+    frame: 1,
     action: 0,
     speed: 5
 };
 
 let frameCount = 0;
 
+
+function resizeCanvas() {
+    const rect = gameField.getBoundingClientRect();
+    // Nastavuje reálný počet pixelů pro kreslení
+    canvas.width = rect.width;
+    canvas.height = rect.height;
+    
+    // Přepočet buněk
+    window.cellW = canvas.width / 10;
+    window.cellH = canvas.height / 5;
+    
+    ctx.imageSmoothingEnabled = false; // Pro ostrý pixelart
+}
+
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas(); 
+
 // 1. GENEROVÁNÍ GRIDU A KLIKÁNÍ
 for(let y=0; y < 5; y++){
     for(let x=0; x < 10; x++){
         const cell = document.createElement("div");
         cell.className = "grid-cell";
-        // Přidání event listeneru pro pohyb
         cell.onclick = () => {
-            test_figure.targetX = x * cellW;
-            test_figure.targetY = y * cellH;
-            test_figure.action = 1; // Přepnutí na animaci pohybu
-            console.log(`Cíl nastaven na: ${x}, ${y}`);
+            test_figure.gridX = x; // Uložíme si index buňky
+            test_figure.gridY = y;
+            test_figure.targetX = x * window.cellW;
+            test_figure.targetY = y * window.cellH;
+            test_figure.action = 1;
         };
         gameField.appendChild(cell);
     }
@@ -63,18 +81,14 @@ function update() {
 
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
-    // TEST: Pokud uvidíš červený čtverec, canvas funguje a chyba je v obrázku
-    ctx.fillStyle = "red";
-    ctx.fillRect(test_figure.pixelX, test_figure.pixelY, 50, 50);
 
     ctx.drawImage(
         spriteSheet,
-        test_figure.frame * spriteW,
+        test_figure.frame * spriteW, 
         test_figure.action * spriteH,
         spriteW, spriteH,
         test_figure.pixelX, test_figure.pixelY,
-        cellW, cellH
+        window.cellW, window.cellH // Dynamická velikost
     );
 }
 
@@ -93,5 +107,4 @@ spriteSheet.onerror = () => {
     console.error("Nepodařilo se načíst obrázek na cestě:", spriteSheet.src);
 };
 
-// Cesta musí přesně odpovídat tvé struktuře (všimni si "asstets")
 spriteSheet.src = '../asstets/items/training-figure/Training-figure.png';
