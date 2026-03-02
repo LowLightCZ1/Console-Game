@@ -3,6 +3,9 @@ fetch('../asstets/json/commands.json')
 .then(command => {
     const console = document.getElementById("consoleArea");
     console.value = command.cd1;
-
+    
 })
 
+function commandFunc() {
+
+};

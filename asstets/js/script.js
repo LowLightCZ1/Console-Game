@@ -13,13 +13,14 @@ canvas.height = 5 * cellH;
 ctx.imageSmoothingEnabled = false;
 
 const spriteSheet = new Image();
+spriteSheet.src = '../asstets/items/training-figure/Training-figure.png';
 
 const test_figure = {
     pixelX: 0,
     pixelY: 0,
     targetX: 0,
     targetY: 0,
-    frame: 1,
+    frame: 0,
     action: 0,
     speed: 5
 };
@@ -49,33 +50,40 @@ for(let y=0; y < 5; y++){
         const cell = document.createElement("div");
         cell.className = "grid-cell";
         cell.onclick = () => {
-            test_figure.gridX = x; // Uložíme si index buňky
+            test_figure.gridX = x; 
             test_figure.gridY = y;
+            // Přepočítáme cíl podle aktuální velikosti okna
             test_figure.targetX = x * window.cellW;
             test_figure.targetY = y * window.cellH;
-            test_figure.action = 1;
+            test_figure.action = 1; // Spustí pohyb v update()
         };
         gameField.appendChild(cell);
     }
 }
 
 function update() {
-    // Pohyb postavy k cíli
-    if (Math.abs(test_figure.pixelX - test_figure.targetX) > 5) {
-        test_figure.pixelX += (test_figure.targetX > test_figure.pixelX) ? test_figure.speed : -test_figure.speed;
-    }
-    if (Math.abs(test_figure.pixelY - test_figure.targetY) > 5) {
-        test_figure.pixelY += (test_figure.targetY > test_figure.pixelY) ? test_figure.speed : -test_figure.speed;
-    }
+    // Pokud postava stojí (action 0), animaci a pohyb neřešíme
+    if (test_figure.action === 0) return;
 
-    // Zastavení animace v cíli
-    if (Math.abs(test_figure.pixelX - test_figure.targetX) <= 5 && Math.abs(test_figure.pixelY - test_figure.targetY) <= 5) {
-        test_figure.action = 0;
-    }
+    const dx = test_figure.targetX - test_figure.pixelX;
+    const dy = test_figure.targetY - test_figure.pixelY;
+    const distance = Math.sqrt(dx * dx + dy * dy);
 
-    frameCount++;
-    if (frameCount % 10 === 0) {
-        test_figure.frame = (test_figure.frame + 1) % 4;
+    if (distance > test_figure.speed) {
+        test_figure.pixelX += (dx / distance) * test_figure.speed;
+        test_figure.pixelY += (dy / distance) * test_figure.speed;
+
+        // Animace chůze (přičítá se jen když action = 1)
+        frameCount++;
+        if (frameCount % 10 === 0) {
+            test_figure.frame = (test_figure.frame + 1) % 4;
+        }
+    } else {
+        // Cíl dosažen
+        test_figure.pixelX = test_figure.targetX;
+        test_figure.pixelY = test_figure.targetY;
+        test_figure.action = 0; // Přepne zpět na "stání" (default)
+        test_figure.frame = 0;  // Reset na první snímek stání
     }
 }
 
@@ -85,10 +93,10 @@ function draw() {
     ctx.drawImage(
         spriteSheet,
         test_figure.frame * spriteW, 
-        test_figure.action * spriteH,
+        0,
         spriteW, spriteH,
         test_figure.pixelX, test_figure.pixelY,
-        window.cellW, window.cellH // Dynamická velikost
+        window.cellW, window.cellH
     );
 }
 
@@ -107,4 +115,3 @@ spriteSheet.onerror = () => {
     console.error("Nepodařilo se načíst obrázek na cestě:", spriteSheet.src);
 };
 
-spriteSheet.src = '../asstets/items/training-figure/Training-figure.png';
