@@ -12,8 +12,8 @@ canvas.width = 10 * cellW;
 canvas.height = 5 * cellH;
 ctx.imageSmoothingEnabled = false;
 
-const spriteSheet = new Image();
-spriteSheet.src = '../asstets/items/training-figure/Training-figure.png';
+const Player = new Image();
+Player.src = '../asstets/items/training-figure/Training-figure.png';
 
 const test_figure = {
     pixelX: 0,
@@ -91,7 +91,7 @@ function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     ctx.drawImage(
-        spriteSheet,
+        Player,
         test_figure.frame * spriteW, 
         0,
         spriteW, spriteH,
@@ -106,12 +106,12 @@ function gameLoop() {
     requestAnimationFrame(gameLoop);
 }
 
-spriteSheet.onload = () => {
+Player.onload = () => {
     console.log("Obrázek načten.");
     gameLoop();
 };
 
-spriteSheet.onerror = () => {
-    console.error("Nepodařilo se načíst obrázek na cestě:", spriteSheet.src);
+Player.onerror = () => {
+    console.error("Nepodařilo se načíst obrázek na cestě:", Player.src);
 };
 
