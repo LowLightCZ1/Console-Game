@@ -29,7 +29,7 @@ let frameCount = 0;
 
 
 function resizeCanvas() {
-    const rect = gameField.getBoundingClientRect();
+    const rect = canvas.getBoundingClientRect();
     // Nastavuje reálný počet pixelů pro kreslení
     canvas.width = rect.width;
     canvas.height = rect.height;
