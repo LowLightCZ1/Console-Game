@@ -49,6 +49,10 @@ for(let y=0; y < 5; y++){
     for(let x=0; x < 10; x++){
         const cell = document.createElement("div");
         cell.className = "grid-cell";
+
+        cell.style.gridColumn = `${x + 1} / ${x + 2}`;
+        cell.style.gridRow = `${y + 1} / ${y + 2}`;
+        
         cell.onclick = () => {
             test_figure.gridX = x; 
             test_figure.gridY = y;

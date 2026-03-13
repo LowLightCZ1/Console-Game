@@ -45,6 +45,7 @@ body{
     display: grid;
     grid-template-columns: repeat(10, 0.5fr [game-col]);
     grid-template-rows: repeat(5, 0.5fr [game-row]);
+    position: relative;
 }   
 
 
@@ -56,23 +57,24 @@ body{
     background-color: transparent !important;
     pointer-events: none;
     margin: 0;
+    width: 100vw;
+    height: 100vh;
 }
 
 
 .grid-cell {
     z-index: 110;
-    width: 192px;
-    height: 240px;
     border: 1px solid rgba(255,255,255,0.05);
 }
 
 /* ------CONSOLE FIELD-------*/
 .console-field{
     position: fixed;
-    top: 800px;
-    left: 520px;
-    width: 800px;
-    height: 150px;
+    bottom: 3vh;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(800px, 90vw);
+    height: clamp(100px, 15vh, 150px);
     z-index: 120;
 }
 
@@ -92,14 +94,13 @@ body{
 
 
 .text-bg{
-    position: fixed;
-    top: 807px;
-    left: 528px;
-    width: 785px;
-    height: 135px;
+    position: absolute;
+    top: 7px;
+    left: 8px;
+    width: calc(100% - 16px);
+    height: calc(100% - 14px);
     background-color: #000;
     z-index: 100;
-
 }
 
 .console-text:focus{
