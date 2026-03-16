@@ -69,9 +69,11 @@ function buildGrid(data)
             if(filename){
                 cell.className = "grid-cell";
                 const img = document.createElement("img");
+                img.className = "bgr-img";
                 img.src = "../asstets/items/background/" + filename;
                 img.alt = filename;
                 img.loading = "lazy";
+                img.imageSmoothingEnabled = false;
                 cell.appendChild(img);
             }
             else{

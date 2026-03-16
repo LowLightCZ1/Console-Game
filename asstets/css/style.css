@@ -52,7 +52,7 @@ body{
 #gameCanvas{
     grid-column: 1 / -1; /*For all cols*/
     grid-row: 1 / -1; /*For all rows*/
-    z-index: 100;
+    z-index: 110;
     image-rendering: pixelated;
     background-color: transparent !important;
     pointer-events: none;
@@ -63,12 +63,17 @@ body{
 
 
 .grid-cell {
-    z-index: 110;
+    height: 100%;
+    width: 100%;
+    z-index: 100;
     border: 1px solid rgba(255,255,255,0.05);
 }
 
 
-
+.bgr-img{
+    width: 100%;
+    height: fit-content;
+}
 
 /* ------CONSOLE FIELD-------*/
 .console-field{
