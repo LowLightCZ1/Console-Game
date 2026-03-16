@@ -2,7 +2,6 @@ const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 const gameField = document.getElementById("gameField");
 
-
 const cellW = 192;
 const cellH = 240;
 const spriteW = 32; 
@@ -44,26 +43,58 @@ function resizeCanvas() {
 window.addEventListener('resize', resizeCanvas);
 resizeCanvas(); 
 
-// 1. GENEROVÁNÍ GRIDU A KLIKÁNÍ
-for(let y=0; y < 5; y++){
-    for(let x=0; x < 10; x++){
-        const cell = document.createElement("div");
-        cell.className = "grid-cell";
+// ------------------------------------- //
+fetch("../asstets/json/background.json")
+.then(res => {
+    if(!res.ok) throw new Error(`Soubor "${"../asstets/json/background.json"}"(HTTP ${res.status})`)
+    return res.json();
+})
+.then(data => {
+    buildGrid(data);
+});
 
-        cell.style.gridColumn = `${x + 1} / ${x + 2}`;
-        cell.style.gridRow = `${y + 1} / ${y + 2}`;
-        
-        cell.onclick = () => {
-            test_figure.gridX = x; 
-            test_figure.gridY = y;
-            // Přepočítáme cíl podle aktuální velikosti okna
-            test_figure.targetX = x * window.cellW;
-            test_figure.targetY = y * window.cellH;
-            test_figure.action = 1; // Spustí pohyb v update()
-        };
-        gameField.appendChild(cell);
+function buildGrid(data)
+{
+    const imageMap = {};
+    data.forEach(({filename, row, col}) => {
+        imageMap[`${row}-${col}`] = filename
+    });
+
+    for(let row = 1; row <= 5; row++){
+        for(let col = 1; col <= 10; col++){
+            const cell = document.createElement("div");
+            const key = `${row}-${col}`;
+            const filename = imageMap[key];
+
+            if(filename){
+                cell.className = "grid-cell";
+                const img = document.createElement("img");
+                img.src = "../asstets/items/background/" + filename;
+                img.alt = filename;
+                img.loading = "lazy";
+                cell.appendChild(img);
+            }
+            else{
+                cell.className = "empty cell";
+            }
+
+            cell.onclick = () => {
+                test_figure.gridX = col; 
+                test_figure.gridY = row;
+                // Přepočítáme cíl podle aktuální velikosti okna
+                test_figure.targetX = (col - 1) * window.cellW;
+                test_figure.targetY = (row - 1) * window.cellH;
+                test_figure.action = 1; // Spustí pohyb v update()
+            }
+
+            cell.style.gridRow = row;
+            cell.style.gridColumn = col;
+            gameField.appendChild(cell);
+        }
     }
+
 }
+// -------------------------------------- //
 
 function update() {
     // Pokud postava stojí (action 0), animaci a pohyb neřešíme
@@ -103,6 +134,8 @@ function draw() {
         window.cellW, window.cellH
     );
 }
+
+
 
 function gameLoop() {
     update();
