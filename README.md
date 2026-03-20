@@ -33,4 +33,4 @@ K vykreslování vizuální části světa je využíván **HTML5 Canvas**, kter
 Do budoucna je možné projekt dále rozšířit například o práci se serverem, ukládání dat nebo pokročilejší uživatelské rozhraní.
 
 
-Dodatečná zpráva: Zdravím pane učitel, upozorňuji na to že Matiáš Mizera a Jakub Pikal za celou dobu tohoto projektu neudělali vůbec nic (kromě Matiáše, který uělal aspoň README) a proto byly vyloučeni z kolaborace. Proto bych vás poprosil při konečném známkování vzít tento fakt v potaz. Pokud by toto nestačilo, rád vám ukáži historii commitů na GitHubu. Děkui moc.
+- __Dodatečná zpráva__: Zdravím pane učitel, upozorňuji na to že Matiáš Mizera a Jakub Pikal za celou dobu tohoto projektu neudělali vůbec nic (kromě Matiáše, který uělal aspoň README) a proto byly vyloučeni z kolaborace. Proto bych vás poprosil při konečném známkování vzít tento fakt v potaz. Pokud by toto nestačilo, rád vám ukáži historii commitů na GitHubu. Děkui moc.
