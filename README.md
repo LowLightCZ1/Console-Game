@@ -31,3 +31,6 @@ Projekt je v současné fázi realizován pomocí následujících technologií:
 K vykreslování vizuální části světa je využíván **HTML5 Canvas**, který umožňuje dynamické zobrazování objektů a jejich změn v reálném čase.
 
 Do budoucna je možné projekt dále rozšířit například o práci se serverem, ukládání dat nebo pokročilejší uživatelské rozhraní.
+
+
+- __Dodatečná zpráva__: Zdravím pane učitel, upozorňuji na to že Matiáš Mizera a Jakub Pikal za celou dobu tohoto projektu neudělali vůbec nic (kromě Matiáše, který uělal aspoň README) a proto byly vyloučeni z kolaborace. Proto bych vás poprosil při konečném známkování vzít tento fakt v potaz. Pokud by toto nestačilo, rád vám ukáži historii commitů na GitHubu. Děkui moc.
