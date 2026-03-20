@@ -29,16 +29,19 @@ let frameCount = 0;
 
 function resizeCanvas() {
     const rect = canvas.getBoundingClientRect();
-    // Nastavuje reálný počet pixelů pro kreslení
-    canvas.width = rect.width;
-    canvas.height = rect.height;
-    
-    // Přepočet buněk
-    window.cellW = canvas.width / 10;
-    window.cellH = canvas.height / 5;
-    
-    ctx.imageSmoothingEnabled = false; // Pro ostrý pixelart
+    const dpr = window.devicePixelRatio || 1;
+
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); // scale all drawing by dpr
+
+    window.cellW = rect.width / 10;
+    window.cellH = rect.height / 5;
+
+    ctx.imageSmoothingEnabled = false;
 }
+
 
 window.addEventListener('resize', resizeCanvas);
 resizeCanvas(); 
@@ -127,13 +130,19 @@ function update() {
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+    const drawW = window.cellW * 1; // or whatever looks good
+    const drawH = window.cellH * 1;
+
+    // Tweak these offset values until it looks right
+    const offsetX = 0;
+    const offsetY = 10; // e.g. shift up/down to compensate
+
     ctx.drawImage(
         Player,
-        test_figure.frame * spriteW, 
-        0,
-        spriteW, spriteH,
-        test_figure.pixelX, test_figure.pixelY,
-        window.cellW, window.cellH
+        test_figure.frame * spriteW, 0, spriteW, spriteH,
+        test_figure.pixelX + (window.cellW - drawW) / 2 + offsetX,
+        test_figure.pixelY + (window.cellH - drawH) / 2 + offsetY,
+        drawW, drawH
     );
 }
 

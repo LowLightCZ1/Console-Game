@@ -3,5 +3,121 @@
         "filename": "Corner-1.png",
         "row": 5,
         "col": 1
+    },
+
+    {
+        "filename": "Lower-ground_1.png",
+        "row": 5,
+        "col": 2
+    },
+
+    {
+        "filename": "Lower-ground_1.png",
+        "row": 5,
+        "col": 3
+    },
+
+    {
+        "filename": "Lower-ground_1.png",
+        "row": 5,
+        "col": 4
+    },
+
+    {
+        "filename": "Lower-ground_1.png",
+        "row": 5,
+        "col": 5
+    },
+
+    {
+        "filename": "Lower-ground_1.png",
+        "row": 5,
+        "col": 6
+    },
+
+    {
+        "filename": "Lower-ground_1.png",
+        "row": 5,
+        "col": 7
+    },
+
+    {
+        "filename": "Lower-ground_1.png",
+        "row": 5,
+        "col": 8
+    },
+
+    {
+        "filename": "Lower-ground_1.png",
+        "row": 5,
+        "col": 9
+    },
+
+    {
+        "filename": "Corner-2.png",
+        "row": 5,
+        "col": 10
+    },
+
+    {
+        "filename": "Corner-3.png",
+        "row": 1,
+        "col": 10
+    },
+
+    {
+        "filename": "Corner-4.png",
+        "row": 1,
+        "col": 1
+    },
+
+    {
+        "filename": "Game-Field.png",
+        "row": 2,
+        "col": 2
+    },
+
+    {
+        "filename": "Game-Field.png",
+        "row": 2,
+        "col": 3
+    },
+
+    {
+        "filename": "Game-Field.png",
+        "row": 2,
+        "col": 4
+    },
+
+    {
+        "filename": "Game-Field.png",
+        "row": 2,
+        "col": 5
+    },
+
+        {
+        "filename": "Game-Field.png",
+        "row": 2,
+        "col": 6
+    },
+
+        {
+        "filename": "Game-Field.png",
+        "row": 2,
+        "col": 7
+    },
+
+        {
+        "filename": "Game-Field.png",
+        "row": 2,
+        "col": 8
+    },
+
+        {
+        "filename": "Game-Field.png",
+        "row": 2,
+        "col": 9
     }
+
+    
 ]
