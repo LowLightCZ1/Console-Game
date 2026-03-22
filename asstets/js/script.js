@@ -2,10 +2,14 @@ const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 const gameField = document.getElementById("gameField");
 
-const cellW = 192;
-const cellH = 240;
-const spriteW = 32; 
-const spriteH = 32;
+let cellW = 192;
+let cellH = 240;
+let spriteW = 32; 
+let spriteH = 32;
+
+let playerH = 32;
+let playerW = 32;
+
 
 canvas.width = 10 * cellW;
 canvas.height = 5 * cellH;
@@ -31,17 +35,25 @@ function resizeCanvas() {
     const rect = canvas.getBoundingClientRect();
     const dpr = window.devicePixelRatio || 1;
 
-    canvas.width = rect.width * dpr;
-    canvas.height = rect.height * dpr;
+    // canvas.width = rect.width * dpr;
+    // canvas.height = rect.height * dpr;
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); // scale all drawing by dpr
+    //ctx.setTransform(dpr, 0, 0, dpr, 0, 0); // scale all drawing by dpr
 
-    window.cellW = rect.width / 10;
-    window.cellH = rect.height / 5;
+    window.cellW = canvas.width / 10;
+    window.cellH = canvas.height / 5;
+
+    playerH = window.cellH;
+    playerW = window.cellW;
+
+    gameField.style.height = window.innerHeight +"px";
 
     ctx.imageSmoothingEnabled = false;
 }
 
+console.log(window.innerHeight)
 
 window.addEventListener('resize', resizeCanvas);
 resizeCanvas(); 
@@ -130,18 +142,19 @@ function update() {
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+    ctx.fillStyle = "red";
+    ctx.fillRect(test_figure.pixelX, test_figure.pixelY, playerW, playerH);
+
     const drawW = window.cellW * 1; // or whatever looks good
     const drawH = window.cellH * 1;
 
     // Tweak these offset values until it looks right
-    const offsetX = 0;
-    const offsetY = 10; // e.g. shift up/down to compensate
 
     ctx.drawImage(
         Player,
         test_figure.frame * spriteW, 0, spriteW, spriteH,
-        test_figure.pixelX + (window.cellW - drawW) / 2 + offsetX,
-        test_figure.pixelY + (window.cellH - drawH) / 2 + offsetY,
+        test_figure.pixelX,
+        test_figure.pixelY,
         drawW, drawH
     );
 }
