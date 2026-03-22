@@ -3,7 +3,7 @@ const ctx = canvas.getContext("2d");
 const gameField = document.getElementById("gameField");
 
 let cellW = 192;
-let cellH = 240;
+let cellH = 120;
 let spriteW = 32; 
 let spriteH = 32;
 
@@ -142,8 +142,8 @@ function update() {
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    ctx.fillStyle = "red";
-    ctx.fillRect(test_figure.pixelX, test_figure.pixelY, playerW, playerH);
+    //ctx.fillStyle = "red";
+    //ctx.fillRect(test_figure.pixelX, test_figure.pixelY, playerW, playerH);
 
     const drawW = window.cellW * 1; // or whatever looks good
     const drawH = window.cellH * 1;
