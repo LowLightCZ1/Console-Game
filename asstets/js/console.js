@@ -6,7 +6,10 @@ fetch('../asstets/json/commands.json')
 
     consoleArea.value = startCd ? startCd.cd1 : "start_message_error:404";
 
-
+    consoleCom(data);
 });
 
 
+function consoleCom(data){
+    
+}

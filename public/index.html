@@ -3,29 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Link for google Inter font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-    <!---->
-    <link rel="stylesheet" href="../asstets/css/reset.css">
-    <link rel="stylesheet" href="../asstets/css/style.css">
+    <link rel="stylesheet" href="../asstets/css/main.css">
     <title>Console Game</title>
 </head>
 <body>
-    <div id="mainCon" class="main-container">
-        <div id="gameCon" class="game-container">
-            <div id="gameField" class="game-field">
-                <canvas id="gameCanvas"></canvas>
-
-            </div>
-        </div>
-        <div id="consField" class="console-field">
-            <textarea name="console" id="consoleArea" class="console-text"></textarea>
-            <div class="text-bg">   </div>
-        </div>
+    <div class="main-con">
+        <h1>CONSOLE GAME</h1>
+        <input type="text" name="player" id="nameInput" placeholder="YOUR NAME...">
+        <a href="../public/game.html">
+            <button class="game-btn" id="gameBtn">PLAY</button>
+        </a>
     </div>
-    <script src="../asstets/js/script.js"></script>
-    <script src="../asstets/js/console.js"></script>
 </body>
 </html>
