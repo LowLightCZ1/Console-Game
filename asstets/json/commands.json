@@ -1,7 +1,7 @@
 
 [
     {
-        "cd1": "Welcome to the game"
+        "cd1": "Welcome to the game {name}"
     },
 
     {

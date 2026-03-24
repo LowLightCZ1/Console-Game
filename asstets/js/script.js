@@ -2,6 +2,7 @@ const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 const gameField = document.getElementById("gameField");
 
+
 let cellW = 192;
 let cellH = 120;
 let spriteW = 32; 
@@ -19,10 +20,12 @@ const Player = new Image();
 Player.src = '../asstets/items/training-figure/Training-figure.png';
 
 const test_figure = {
-    pixelX: 0,
-    pixelY: 0,
-    targetX: 0,
-    targetY: 0,
+    pixelX: 1 * window.cellW,
+    pixelY: 1 * window.cellH,
+    targetX: 1 * window.cellW,
+    targetY: 1 * window.cellH,
+    gridX: 2,
+    gridY: 2,
     frame: 0,
     action: 0,
     speed: 5

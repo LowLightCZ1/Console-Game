@@ -1,15 +1,23 @@
+const consoleArea = document.getElementById("consoleArea");
+
 fetch('../asstets/json/commands.json')
 .then(res => res.json())
 .then(command => {
-    const consoleArea = document.getElementById("consoleArea");
+    const name = localStorage.getItem("nameValue") || "User";
+    const prompt = `${name} :`;
+
+    console.log(name)
+
     const startCd = command.find(cd => cd.cd1);
+    const welcomeMessage = startCd ? startCd.cd1.replace("{name}", name) : "Welcome to the game";
 
-    consoleArea.value = startCd ? startCd.cd1 : "start_message_error:404";
+    consoleArea.value = welcomeMessage + "\n" + prompt;
+    consoleArea.focus();
 
-    consoleCom(data);
+    consoleCom(command);
 });
 
 
-function consoleCom(data){
+function consoleCom(commandDAta){
     
 }
