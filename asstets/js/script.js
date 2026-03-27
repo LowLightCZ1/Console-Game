@@ -98,14 +98,14 @@ function buildGrid(data)
                 cell.className = "empty cell";
             }
 
-            cell.onclick = () => {
-                test_figure.gridX = col; 
-                test_figure.gridY = row;
-                // Přepočítáme cíl podle aktuální velikosti okna
-                test_figure.targetX = (col - 1) * window.cellW;
-                test_figure.targetY = (row - 1) * window.cellH;
-                test_figure.action = 1; // Spustí pohyb v update()
-            }
+            // cell.onclick = () => {
+            //     test_figure.gridX = col; 
+            //     test_figure.gridY = row;
+            //     // Přepočítáme cíl podle aktuální velikosti okna
+            //     test_figure.targetX = (col - 1) * window.cellW;
+            //     test_figure.targetY = (row - 1) * window.cellH;
+            //     test_figure.action = 1; // Spustí pohyb v update()
+            // }
 
             cell.style.gridRow = row;
             cell.style.gridColumn = col;
@@ -162,6 +162,21 @@ function draw() {
     );
 }
 
+
+window.gameAPI = {
+    moveCharacter(col, row){
+        const maxCol = 10, maxRow = 5;
+        if(col < 1 || col > maxCol || row < 1 || row > maxRow){
+            return { ok: false, msg: `Out of bounds. Grid is ${maxCol}×${maxRow}.` };
+        }
+        test_figure.gridX   = col;
+        test_figure.gridY   = row;
+        test_figure.targetX = (col - 1) * window.cellW;
+        test_figure.targetY = (row - 1) * window.cellH;
+        test_figure.action  = 1;
+        return { ok: true };
+    }
+}
 
 
 function gameLoop() {

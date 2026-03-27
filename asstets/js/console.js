@@ -8,13 +8,13 @@ fetch('../asstets/json/commands.json')
 
     console.log(name)
 
-    const startCmd = commands.find(cd => cd.cd1);
-    const welcome = startCmd ? startCmd.cd1.replace("{name}", name) : "Welcome to the game";
+    const startCmd = commands.find(cd => cd.start);
+    const welcome = startCmd ? startCmd.start.replace("{name}", name) : "Welcome to the game";
 
     appendLine(welcome);
     appendPrompt(name);
 
-    const cmdMap = Object.assign({}, ...commands.filter(c => !c.cd1));
+    const cmdMap = Object.assign({}, ...commands.filter(c => !c.start));
     consoleCom(cmdMap, name);
 
 })
@@ -41,7 +41,7 @@ function appendPrompt(name){
 
 function scrollToBottom(){
     consoleArea.scrollTop = consoleArea.scrollHeight;
-    consoleArea.setSelectionRange(consoleArea.value.length, consoleArea.value.length);
+    consoleArea.setSelectionRange(startLength, startLength);
 }
 
 function getCurrentInput() {
@@ -54,7 +54,7 @@ function consoleCom(cmdMap, name){
     // Guard: keep cursor inside editable zone
     consoleArea.addEventListener("click", () =>{
         if(consoleArea.selectionStart < startLength){
-            consoleArea.setSelectionRange(consoleArea.value.length, consoleArea.value.length);
+            consoleArea.setSelectionRange(startLength, startLength);
         }
     });
 
@@ -81,7 +81,7 @@ function consoleCom(cmdMap, name){
     // Ctrl+A selects only current input, not history
     if ((e.ctrlKey || e.metaKey) && e.key === "a") {
       e.preventDefault();
-      consoleArea.setSelectionRange(startLength, consoleArea.value.length);
+      consoleArea.setSelectionRange(startLength, startLength);
       return;
     }
  
@@ -117,7 +117,7 @@ function processCommand(input, cmdMap, name) {
     appendLine("\nAvailable commands:\n");
     allCmds.forEach(cmd => {
       const desc = cmdMap[cmd]?.description || "...";
-      appendLine(`  ${cmd.padEnd(12)} - ${desc}`);
+      appendLine(`  ${cmd.padEnd(6)} - ${desc}`);
     });
     return;
   }
@@ -128,6 +128,32 @@ function processCommand(input, cmdMap, name) {
     if (action) runAction(action, name);
     consoleArea.value = "";
     startLength = 0;
+    return;
+  }
+
+  //"move x,y - move character on specific grid"
+
+  if(lower.startsWith("move")){
+    const args = input.slice(4).trim();
+    const match = args.match(/^(\d+)\s*,\s*(\d+)$/);
+
+    if(!match){
+      appendLine('\nUsage: move x,y  (e.g. move 3,2)\n');
+      return;
+    }
+
+    const col = parseInt(match[1], 10);
+    const row = parseInt(match[2], 10);
+
+    if(!window.gameAPI){
+      appendLine('\nGame not initialised yet.\n');
+      return;
+    }
+
+    const result = window.gameAPI.moveCharacter(col, row);
+    appendLine(
+      result.ok ? `\nMoving to (${col}, ${row})...\n` :`\nError: ${result.msg}\n`
+    );
     return;
   }
  
