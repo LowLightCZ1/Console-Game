@@ -17,6 +17,11 @@
   width: 0px;
 } 
 
+html, body { height: 100%; overflow: hidden; }
+.main-container { height: 100vh; overflow: hidden; }
+.game-container { height: 100%; overflow: hidden; }
+.game-field     { height: 100%; overflow: hidden; }
+
 body{
     background-color: #555;
     height: 100vh;
@@ -78,6 +83,7 @@ img {
     height: fit-content;
     display: block;
 }
+
 
 /* ------CONSOLE FIELD-------*/
 .console-field{

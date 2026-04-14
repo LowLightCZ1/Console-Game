@@ -25,6 +25,8 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+
 }
 
 .main-con{
@@ -57,3 +59,9 @@ body{
     width: 100px;
     height: 50px;
 }
+
+.text > h2{
+    color: red;
+    -webkit-text-stroke: 0.5px #000;
+}
+

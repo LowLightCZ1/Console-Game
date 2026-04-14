@@ -35,13 +35,13 @@ let frameCount = 0;
 
 
 function resizeCanvas() {
-    const rect = canvas.getBoundingClientRect();
+    const rect = gameField.getBoundingClientRect();
     const dpr = window.devicePixelRatio || 1;
 
     // canvas.width = rect.width * dpr;
     // canvas.height = rect.height * dpr;
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    canvas.width = rect.width;
+    canvas.height = rect.height;
 
     //ctx.setTransform(dpr, 0, 0, dpr, 0, 0); // scale all drawing by dpr
 
@@ -51,7 +51,6 @@ function resizeCanvas() {
     playerH = window.cellH;
     playerW = window.cellW;
 
-    gameField.style.height = window.innerHeight +"px";
 
     ctx.imageSmoothingEnabled = false;
 }
@@ -109,6 +108,7 @@ function buildGrid(data)
 
             cell.style.gridRow = row;
             cell.style.gridColumn = col;
+            cell.style.outline = "1px solid #000"
             gameField.appendChild(cell);
         }
     }

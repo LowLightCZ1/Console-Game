@@ -1,7 +1,7 @@
 
 [
     {
-        "start": "Welcome to the game {name}"
+        "start": "Welcome to the game {name}. Type tutorial"
     },
 
     {
@@ -18,6 +18,10 @@
         "move":
         {
             "description" : "move selected character on specific pos. (x, y)"
+        },
+        
+        "tutorial":
+        {
         }
     }
 

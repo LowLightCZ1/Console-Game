@@ -92,6 +92,34 @@ function consoleCom(cmdMap, name){
       processCommand(input, cmdMap, name);
       appendPrompt(name);
     }
+
+    // Tab: comlete command
+    if(e.key === "Tab"){
+      e.preventDefault();
+
+      const input = getCurrentInput().trim();
+      if(!input) return;
+
+      const allCmds = [...new Set(["help", "clear","move", ...Object.keys(cmdMap)])];
+      const matches = allCmds.filter(cmd => cmd.startsWith(input.toLowerCase()));
+
+      if(matches.length === 1){
+        let startLength = consoleArea.value.length;
+
+        consoleArea.value = consoleArea.value.slice(0, startLength) + matches[0];
+
+        consoleArea.setSelectionRange(startLength, startLength);
+        
+      }else if(matches.length > 1){
+        
+        appendLine("\n" + matches.join("  "));
+        appendPrompt(name);
+
+        consoleArea.value += input;
+        consoleArea.setSelectionRange(startLength, startLength);
+      }
+    }
+
   });
  
   // Block paste into locked region
@@ -108,7 +136,8 @@ function processCommand(input, cmdMap, name) {
   if (!input) return;
  
   const lower = input.toLowerCase();
- 
+  
+
   // "help" — list all available commands from JSON + built-ins
   if (lower === "help") {
     const jsonCmds = Object.keys(cmdMap);
@@ -156,6 +185,7 @@ function processCommand(input, cmdMap, name) {
     );
     return;
   }
+
  
   // JSON-defined commands
   if (cmdMap[lower]) {
