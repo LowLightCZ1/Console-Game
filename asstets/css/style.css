@@ -35,6 +35,7 @@ body{
     width: 100%;
 }
 
+
 /*------GAME FIELD-------*/
 .game-container{
     position: relative;
@@ -67,13 +68,16 @@ body{
 }
 
 
-.grid-cell, .empty.cell{
+.grid-cell, .empty.cell, .game-cell{
     height: 100%;
     width: 100%;
     z-index: 100;
     /*outline: 2px solid red;*/
 }
 
+.game-cell{
+   outline:  1px solid #000;
+}
 
 img {
     display: block;
@@ -84,6 +88,8 @@ img {
     height: fit-content;
     display: block;
 }
+
+
 
 
 /* ------CONSOLE FIELD-------*/
@@ -106,7 +112,7 @@ img {
     border-image: url("../items/banner/Console-baner.png") 20 round;
     background-color: transparent;
     z-index: 101;
-    color: #0b8800;
+    color: #13e700;
     font-size: medium;
     font-family: 'minecraft';
 }
@@ -131,5 +137,29 @@ img {
     text-align: start;
 }
 
+
+/* ---------------------------- */
+.tutorial {
+    position: fixed;
+    top: 15vh;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(800px, 90vw);
+    height: clamp(100px, 60vh, 70%);
+    z-index: 200;
+    background-color: #fff;
+    display: grid;
+    grid-template-columns: [start] 1fr [middle] 1fr [end];
+    grid-auto-flow: column;
+}
+
+.tutorial img{
+    image-rendering: pixelated;
+    height: 100%;
+}
+
+.img-1{
+    grid-column: start / middle;
+}
 
 

@@ -16,8 +16,8 @@ canvas.width = 10 * cellW;
 canvas.height = 5 * cellH;
 ctx.imageSmoothingEnabled = false;
 
-const Player = new Image();
-Player.src = '../asstets/items/training-figure/Training-figure.png';
+let Player = new Image();
+Player.src = '../asstets/items/training-figure/Warrior.png';
 
 const test_figure = {
     pixelX: 1 * window.cellW,
@@ -92,14 +92,16 @@ function buildGrid(data)
                 img.loading = "lazy";
                 img.imageSmoothingEnabled = false;
                 cell.appendChild(img);
-                if(filename === "Game-Field.png"){
-                    cell.style.outline = "1px solid #000"
-                }
+
             }
             else{
                 cell.className = "empty cell";
             }
+                
+            if(filename === "Game-Field.png"){
+                cell.className = "game-cell";
 
+            }
             
 
 
