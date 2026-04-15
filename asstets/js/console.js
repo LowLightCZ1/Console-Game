@@ -99,24 +99,23 @@ function consoleCom(cmdMap, name){
 
       const input = getCurrentInput().trim();
       if(!input) return;
+      const lower = input.toLowerCase();
 
       const allCmds = [...new Set(["help", "clear","move", ...Object.keys(cmdMap)])];
-      const matches = allCmds.filter(cmd => cmd.startsWith(input.toLowerCase()));
+      const matches = allCmds.filter(cmd => cmd.startsWith(lower));
 
-      if(matches.length === 1){
-        let startLength = consoleArea.value.length;
-
+      if (matches.length === 1) {
+        // Replace everything after the prompt with the completed command
         consoleArea.value = consoleArea.value.slice(0, startLength) + matches[0];
-
-        consoleArea.setSelectionRange(startLength, startLength);
-        
-      }else if(matches.length > 1){
-        
+        consoleArea.setSelectionRange(consoleArea.value.length, consoleArea.value.length);
+      
+      } else if (matches.length > 1) {
         appendLine("\n" + matches.join("  "));
         appendPrompt(name);
-
+      
+        // Re-type what the user had so far
         consoleArea.value += input;
-        consoleArea.setSelectionRange(startLength, startLength);
+        consoleArea.setSelectionRange(consoleArea.value.length, consoleArea.value.length);
       }
     }
 

@@ -1,4 +1,6 @@
-document.getElementById("gameBtn").addEventListener("click", function () {
+const btn = document.getElementById("gameBtn")
+
+btn.addEventListener("click", function () {
     const name = document.getElementById("nameInput").value.trim();
 
     if (!name) {
@@ -8,4 +10,5 @@ document.getElementById("gameBtn").addEventListener("click", function () {
 
     localStorage.setItem("nameValue", name);
     window.location.href = "../public/game.html"; // Navigate manually
+    
 });

@@ -92,23 +92,19 @@ function buildGrid(data)
                 img.loading = "lazy";
                 img.imageSmoothingEnabled = false;
                 cell.appendChild(img);
+                if(filename === "Game-Field.png"){
+                    cell.style.outline = "1px solid #000"
+                }
             }
             else{
                 cell.className = "empty cell";
             }
 
-            // cell.onclick = () => {
-            //     test_figure.gridX = col; 
-            //     test_figure.gridY = row;
-            //     // Přepočítáme cíl podle aktuální velikosti okna
-            //     test_figure.targetX = (col - 1) * window.cellW;
-            //     test_figure.targetY = (row - 1) * window.cellH;
-            //     test_figure.action = 1; // Spustí pohyb v update()
-            // }
+            
+
 
             cell.style.gridRow = row;
             cell.style.gridColumn = col;
-            cell.style.outline = "1px solid #000"
             gameField.appendChild(cell);
         }
     }
@@ -194,3 +190,15 @@ Player.onerror = () => {
     console.error("Nepodařilo se načíst obrázek na cestě:", Player.src);
 };
 
+document.addEventListener("DOMContentLoaded", function () {
+    const name = localStorage.getItem("nameValue");
+    console.log("Player:", name); // use your name however you need
+
+    // Fullscreen the page as soon as any click happens
+    document.addEventListener("click", function enterFS() {
+        document.documentElement.requestFullscreen().catch(err => {
+            console.warn("Fullscreen failed:", err);
+        });
+        document.removeEventListener("click", enterFS); // only trigger once
+    }, { once: true });
+});
