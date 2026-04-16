@@ -101,7 +101,7 @@ function consoleCom(cmdMap, name){
       if(!input) return;
       const lower = input.toLowerCase();
 
-      const allCmds = [...new Set(["help", "clear","move", ...Object.keys(cmdMap)])];
+      const allCmds = [...new Set(["help", "clear","move","tutorial", ...Object.keys(cmdMap)])];
       const matches = allCmds.filter(cmd => cmd.startsWith(lower));
 
       if (matches.length === 1) {
@@ -183,6 +183,10 @@ function processCommand(input, cmdMap, name) {
       result.ok ? `\nMoving to (${col}, ${row})...\n` :`\nError: ${result.msg}\n`
     );
     return;
+  }
+
+  if(lower === "tutorial"){
+    
   }
 
  

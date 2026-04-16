@@ -147,19 +147,41 @@ img {
     width: min(800px, 90vw);
     height: clamp(100px, 60vh, 70%);
     z-index: 200;
-    background-color: #fff;
-    display: grid;
-    grid-template-columns: [start] 1fr [middle] 1fr [end];
-    grid-auto-flow: column;
+    
 }
 
-.tutorial img{
-    image-rendering: pixelated;
+.scroll {
+    position: absolute;
+    top: 0;
+    left: 5%;        
+    width: 90%;
     height: 100%;
+    z-index: 201;
 }
 
-.img-1{
-    grid-column: start / middle;
+.img-3 {
+    width: min(800px, 70vw);
+    height: 100%;
+    object-fit: fill;
+    image-rendering: pixelated;
 }
 
+.img-1 {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: auto;
+    z-index: 202;    
+    image-rendering: pixelated;
+}
 
+.img-2 {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: auto;
+    z-index: 202;    
+    image-rendering: pixelated;
+}
