@@ -192,15 +192,15 @@ Player.onerror = () => {
     console.error("Nepodařilo se načíst obrázek na cestě:", Player.src);
 };
 
-document.addEventListener("DOMContentLoaded", function () {
-    const name = localStorage.getItem("nameValue");
-    console.log("Player:", name); // use your name however you need
+// document.addEventListener("DOMContentLoaded", function () {
+//     const name = localStorage.getItem("nameValue");
+//     console.log("Player:", name); // use your name however you need
 
-    // Fullscreen the page as soon as any click happens
-    document.addEventListener("click", function enterFS() {
-        document.documentElement.requestFullscreen().catch(err => {
-            console.warn("Fullscreen failed:", err);
-        });
-        document.removeEventListener("click", enterFS); // only trigger once
-    }, { once: true });
-});
+//     // Fullscreen the page as soon as any click happens
+//     document.addEventListener("click", function enterFS() {
+//         document.documentElement.requestFullscreen().catch(err => {
+//             console.warn("Fullscreen failed:", err);
+//         });
+//         document.removeEventListener("click", enterFS); // only trigger once
+//     }, { once: true });
+// });

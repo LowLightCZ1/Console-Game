@@ -147,20 +147,30 @@ img {
     width: min(800px, 90vw);
     height: clamp(100px, 60vh, 70%);
     z-index: 200;
-    
+    display: none;
+    overflow: hidden;
+}
+
+.tutorial.visible{
+    display: block;
+    position: fixed;
 }
 
 .scroll {
     position: absolute;
     top: 0;
-    left: 5%;        
+    left: 7%;        
     width: 90%;
     height: 100%;
     z-index: 201;
+
+    transform-origin: center;
+    animation: none;
 }
 
+
 .img-3 {
-    width: min(800px, 70vw);
+    width: 90%;
     height: 100%;
     object-fit: fill;
     image-rendering: pixelated;
@@ -185,3 +195,56 @@ img {
     z-index: 202;    
     image-rendering: pixelated;
 }
+
+
+/* -----Animation------ */
+
+
+/* ----- Open ----- */
+@keyframes rollOut {
+    from { clip-path: inset(0 50% 0 50%); }
+    to   { clip-path: inset(0 0% 0 0%); }
+}
+@keyframes slideInLeft {
+    from { transform: translateX(400%); }
+    to   { transform: translateX(0); }
+}
+@keyframes slideInRight {
+    from { transform: translateX(-400%); }
+    to   { transform: translateX(0); }
+}
+
+.tutorial.rolling .img-3 {
+    animation: rollOut 2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.tutorial.rolling .img-1 {
+    animation: slideInLeft 5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.tutorial.rolling .img-2 {
+    animation: slideInRight 5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* ----- Close ----- */
+@keyframes rollIn {
+    from { clip-path: inset(0 0% 0 0%); }
+    to   { clip-path: inset(0 50% 0 50%); }
+}
+@keyframes slideOutLeft {
+    from { transform: translateX(0); }
+    to   { transform: translateX(400%); }
+}
+@keyframes slideOutRight {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-400%); }
+}
+
+.tutorial.rolling-out .img-3 {
+    animation: rollIn 0.5s cubic-bezier(0.64, 0, 0.78, 0) forwards;
+}
+.tutorial.rolling-out .img-1 {
+    animation: slideOutLeft 0.5s cubic-bezier(0.64, 0, 0.78, 0) forwards;
+}
+.tutorial.rolling-out .img-2 {
+    animation: slideOutRight 0.5s cubic-bezier(0.64, 0, 0.78, 0) forwards;
+}
+/* --------------------*/

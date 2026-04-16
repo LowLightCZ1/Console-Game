@@ -48,7 +48,30 @@ function getCurrentInput() {
   return consoleArea.value.slice(startLength);
 }
 
-// ──────────── //
+
+// ────── Tutorial ────── //
+function openTutorial() {
+  const t = document.getElementById("tutorial");
+  t.style.display = 'block';
+  t.classList.remove("rolling-out");
+  void t.offsetWidth;
+  t.classList.add("visible", "rolling");
+  t.addEventListener('animationend', () => t.classList.remove("rolling"), { once: true});
+}
+
+function closeTutorial(){
+  const t = document.getElementById("tutorial");
+  t.classList.remove("rolling");
+  void t.offsetWidth;
+  t.classList.add("rolling-out");
+  t.addEventListener('animationend', () => {
+    t.classList.remove("rolling-out", "visible");
+    t.style.display = "none";
+  }, { once: true});
+}
+
+
+// ───────────────────── //
 
 function consoleCom(cmdMap, name){
     // Guard: keep cursor inside editable zone
@@ -186,7 +209,11 @@ function processCommand(input, cmdMap, name) {
   }
 
   if(lower === "tutorial"){
-    
+    const t = document.getElementById("tutorial");
+    const isOpen = t.classList.contains("visible");
+    appendLine(isOpen ? "\nClosing tutorial..\n" : "\nOpening tutorial...\n");
+    isOpen ? closeTutorial() : openTutorial();
+    return
   }
 
  
