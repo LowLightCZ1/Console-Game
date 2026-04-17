@@ -56,12 +56,15 @@ function openTutorial() {
   t.classList.remove("rolling-out");
   void t.offsetWidth;
   t.classList.add("visible", "rolling");
-  t.addEventListener('animationend', () => t.classList.remove("rolling"), { once: true});
+  t.addEventListener('animationend', () => {
+    t.classList.remove("rolling");
+    t.classList.add("opened");
+  }, { once: true});
 }
 
 function closeTutorial(){
   const t = document.getElementById("tutorial");
-  t.classList.remove("rolling");
+  t.classList.remove("rolling", "opened");
   void t.offsetWidth;
   t.classList.add("rolling-out");
   t.addEventListener('animationend', () => {

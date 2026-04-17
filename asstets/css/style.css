@@ -206,22 +206,22 @@ img {
     to   { clip-path: inset(0 0% 0 0%); }
 }
 @keyframes slideInLeft {
-    from { transform: translateX(400%); }
+    from { transform: translateX(100%); }
     to   { transform: translateX(0); }
 }
 @keyframes slideInRight {
-    from { transform: translateX(-400%); }
+    from { transform: translateX(-100%); }
     to   { transform: translateX(0); }
 }
 
 .tutorial.rolling .img-3 {
-    animation: rollOut 2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation: rollOut 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 .tutorial.rolling .img-1 {
-    animation: slideInLeft 5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation: slideInLeft 2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 .tutorial.rolling .img-2 {
-    animation: slideInRight 5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation: slideInRight 2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 /* ----- Close ----- */
@@ -231,15 +231,15 @@ img {
 }
 @keyframes slideOutLeft {
     from { transform: translateX(0); }
-    to   { transform: translateX(400%); }
+    to   { transform: translateX(100%); }
 }
 @keyframes slideOutRight {
     from { transform: translateX(0); }
-    to   { transform: translateX(-400%); }
+    to   { transform: translateX(-100%); }
 }
 
 .tutorial.rolling-out .img-3 {
-    animation: rollIn 0.5s cubic-bezier(0.64, 0, 0.78, 0) forwards;
+    animation: rollIn 0.6s cubic-bezier(0.64, 0, 0.78, 0) forwards;
 }
 .tutorial.rolling-out .img-1 {
     animation: slideOutLeft 0.5s cubic-bezier(0.64, 0, 0.78, 0) forwards;
@@ -248,3 +248,47 @@ img {
     animation: slideOutRight 0.5s cubic-bezier(0.64, 0, 0.78, 0) forwards;
 }
 /* --------------------*/
+
+.scroll-text {
+    position: absolute;
+    top: 10%;
+    left: 8%;
+    width: 80%;
+    height: 80%;
+    opacity: 0;
+    font-family: 'minecraft';
+    color: #3a2a0a;
+    overflow-y: auto;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+}
+
+.scroll-text h2{
+    position: absolute;
+    top: 5%;
+}
+
+.scroll-text p{
+    position: absolute;
+    top: 10%;
+}
+
+.tutorial.opened .scroll-text {
+    animation: fadeIn 0.9s ease forwards;
+    pointer-events: all;
+}
+
+.tutorial.rolling-out .scroll-text {
+    animation: fadeOut 0.6s ease forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
