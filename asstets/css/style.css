@@ -72,7 +72,7 @@ body{
     height: 100%;
     width: 100%;
     z-index: 100;
-    /*outline: 2px solid red;*/
+    overflow: hidden;
 }
 
 .game-cell{
@@ -85,11 +85,23 @@ img {
 
 .bgr-img{
     width: 100%;
-    height: fit-content;
+    height: 100%;
     display: block;
 }
 
+.field-num{
+    position: relative;
+    z-index: 200;
+    bottom: 150px;
+    left: 65px;
+    display: none;
+    font-family: minecraft;
+}
 
+.game-cell:hover .field-num{
+    display: block;
+    opacity: 1;
+} 
 
 
 /* ------CONSOLE FIELD-------*/

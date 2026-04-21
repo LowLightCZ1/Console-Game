@@ -72,8 +72,6 @@ function closeTutorial(){
     t.style.display = "none";
   }, { once: true});
 }
-
-
 // ───────────────────── //
 
 function consoleCom(cmdMap, name){
@@ -204,12 +202,14 @@ function processCommand(input, cmdMap, name) {
       return;
     }
 
-    const result = window.gameAPI.moveCharacter(col, row);
+    const result = window.gameAPI.moveCharacter(row, col);
     appendLine(
       result.ok ? `\nMoving to (${col}, ${row})...\n` :`\nError: ${result.msg}\n`
     );
     return;
   }
+
+  // Tutorial - Show how to start the game
 
   if(lower === "tutorial"){
     const t = document.getElementById("tutorial");
@@ -217,6 +217,15 @@ function processCommand(input, cmdMap, name) {
     appendLine(isOpen ? "\nClosing tutorial..\n" : "\nOpening tutorial...\n");
     isOpen ? closeTutorial() : openTutorial();
     return
+  }
+
+  if(lower === "class"){
+    const jsonCmd = cmdMap["class"];
+    if(jsonCmd)
+    {
+      console.log(jsonCmd);
+    }
+    
   }
 
  

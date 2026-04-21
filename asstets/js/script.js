@@ -92,6 +92,10 @@ function buildGrid(data)
                 img.loading = "lazy";
                 img.imageSmoothingEnabled = false;
                 cell.appendChild(img);
+                const num = document.createElement("p");
+                num.className = "field-num";
+                num.textContent = key;
+                cell.appendChild(num);
 
             }
             else{

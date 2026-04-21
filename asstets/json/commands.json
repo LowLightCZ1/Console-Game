@@ -25,7 +25,7 @@
         },
 
         "class": {
-            "warrior": "DMG: 10, HP: 300, RANGE: 1",
+            "Warrior": "DMG: 10, HP: 300, RANGE: 1",
             "Mage": "DMG: 5, HP: 150, RANGE: 3",
             "Thief": "DMG: 7, HP: 200, RANGE: 1"
         }
