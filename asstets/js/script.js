@@ -2,6 +2,11 @@ const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 const gameField = document.getElementById("gameField");
 
+if (!localStorage.getItem("playerClass")) {
+  console.warn("No class selected. Type 'class ?' in the console.");
+}
+
+console.log(localStorage);
 
 let cellW = 192;
 let cellH = 120;
@@ -16,22 +21,15 @@ canvas.width = 10 * cellW;
 canvas.height = 5 * cellH;
 ctx.imageSmoothingEnabled = false;
 
-let Player = new Image();
-Player.src = '../asstets/items/training-figure/Warrior.png';
-
-const test_figure = {
-    pixelX: 1 * window.cellW,
-    pixelY: 1 * window.cellH,
-    targetX: 1 * window.cellW,
-    targetY: 1 * window.cellH,
-    gridX: 2,
-    gridY: 2,
-    frame: 0,
-    action: 0,
-    speed: 5
+const classMap = {
+    "Warrior": "../asstets/items/classes/Warrior.png",
+    "Mage": "../asstets/items/classes/Mage.png",
+    "Thief": ""
 };
 
-let frameCount = 0;
+const savedClass = localStorage.getItem("playerClass") || "Warrior";
+let playerSprite = new Image();
+playerSprite.src = classMap[savedClass] || classMap["Warrior"];
 
 
 function resizeCanvas() {
@@ -59,6 +57,23 @@ console.log(window.innerHeight)
 
 window.addEventListener('resize', resizeCanvas);
 resizeCanvas(); 
+
+const figure = {
+    pixelX: 1 * window.cellW,
+    pixelY: 1 * window.cellH,
+    targetX: 1 * window.cellW,
+    targetY: 1 * window.cellH,
+    gridX: 2,
+    gridY: 2,
+    frame: 0,
+    action: 0,
+    speed: 5
+};
+
+let frameCount = 0;
+
+console.log(figure.pixelX, figure.pixelY);
+
 
 // ------------------------------------- //
 fetch("../asstets/json/background.json")
@@ -120,27 +135,27 @@ function buildGrid(data)
 
 function update() {
     // Pokud postava stojí (action 0), animaci a pohyb neřešíme
-    if (test_figure.action === 0) return;
+    //if (figure.action === 0) return;
 
-    const dx = test_figure.targetX - test_figure.pixelX;
-    const dy = test_figure.targetY - test_figure.pixelY;
+    const dx = figure.targetX - figure.pixelX;
+    const dy = figure.targetY - figure.pixelY;
     const distance = Math.sqrt(dx * dx + dy * dy);
 
-    if (distance > test_figure.speed) {
-        test_figure.pixelX += (dx / distance) * test_figure.speed;
-        test_figure.pixelY += (dy / distance) * test_figure.speed;
+    if (distance > figure.speed) {
+        figure.pixelX += (dx / distance) * figure.speed;
+        figure.pixelY += (dy / distance) * figure.speed;
 
         // Animace chůze (přičítá se jen když action = 1)
         frameCount++;
         if (frameCount % 10 === 0) {
-            test_figure.frame = (test_figure.frame + 1) % 4;
+            figure.frame = (figure.frame + 1) % 4;
         }
     } else {
         // Cíl dosažen
-        test_figure.pixelX = test_figure.targetX;
-        test_figure.pixelY = test_figure.targetY;
-        test_figure.action = 0; // Přepne zpět na "stání" (default)
-        test_figure.frame = 0;  // Reset na první snímek stání
+        figure.pixelX = figure.targetX;
+        figure.pixelY = figure.targetY;
+        figure.action = 0; // Přepne zpět na "stání" (default)
+        figure.frame = 0;  // Reset na první snímek stání
     }
 }
 
@@ -148,7 +163,7 @@ function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     //ctx.fillStyle = "red";
-    //ctx.fillRect(test_figure.pixelX, test_figure.pixelY, playerW, playerH);
+    //ctx.fillRect(figure.pixelX, figure.pixelY, playerW, playerH);
 
     const drawW = window.cellW * 1; // or whatever looks good
     const drawH = window.cellH * 1;
@@ -156,10 +171,10 @@ function draw() {
     // Tweak these offset values until it looks right
 
     ctx.drawImage(
-        Player,
-        test_figure.frame * spriteW, 0, spriteW, spriteH,
-        test_figure.pixelX,
-        test_figure.pixelY,
+        playerSprite,
+        figure.frame * spriteW, 0, spriteW, spriteH,
+        figure.pixelX,
+        figure.pixelY,
         drawW, drawH
     );
 }
@@ -171,13 +186,26 @@ window.gameAPI = {
         if(col < 1 || col > maxCol || row < 1 || row > maxRow){
             return { ok: false, msg: `Out of bounds. Grid is ${maxCol}×${maxRow}.` };
         }
-        test_figure.gridX   = col;
-        test_figure.gridY   = row;
-        test_figure.targetX = (col - 1) * window.cellW;
-        test_figure.targetY = (row - 1) * window.cellH;
-        test_figure.action  = 1;
+        figure.gridX   = col;
+        figure.gridY   = row;
+        figure.targetX = (col - 1) * window.cellW;
+        figure.targetY = (row - 1) * window.cellH;
+        figure.action  = 1;
         return { ok: true };
+    },
+
+    setClass(className) {
+        const src = classMap[className];
+        if (!src) {
+            console.error("No sprite mapped for class:", className);
+            return;
+        }
+        const newImg = new Image();
+        newImg.onload = () => { playerSprite = newImg; };
+        newImg.onerror = () => console.error("Failed to load sprite:", src);
+        newImg.src = src;
     }
+
 }
 
 
@@ -187,14 +215,17 @@ function gameLoop() {
     requestAnimationFrame(gameLoop);
 }
 
-Player.onload = () => {
+playerSprite.onload = () => {
     console.log("Obrázek načten.");
     gameLoop();
 };
 
-Player.onerror = () => {
+playerSprite.onerror = () => {
     console.error("Nepodařilo se načíst obrázek na cestě:", Player.src);
 };
+
+console.log("Class:", localStorage.getItem("playerClass"));
+console.log("Sprite src:", playerSprite.src);
 
 // document.addEventListener("DOMContentLoaded", function () {
 //     const name = localStorage.getItem("nameValue");

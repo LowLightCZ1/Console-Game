@@ -219,15 +219,44 @@ function processCommand(input, cmdMap, name) {
     return
   }
 
-  if(lower === "class"){
+  if(lower === "class" || lower.startsWith("class ")){
     const jsonCmd = cmdMap["class"];
-    if(jsonCmd)
+    if(!jsonCmd)
     {
-      console.log(jsonCmd);
+      appendLine("\n No class data found ");
+      return;
     }
     
-  }
+    const arg = input.slice(5).trim();
 
+    if(!arg || arg === "?"){
+      appendLine("\n Avaiable clasees: ");
+      Object.entries(jsonCmd).forEach(([className, stats]) => {
+        appendLine(`${className.padEnd(10)} - ${stats}`);
+      });
+      appendLine("");
+      return;
+    }
+
+    const match = Object.keys(jsonCmd).find(
+      k => k.toLowerCase() === arg.toLowerCase()
+    );
+
+    if(!match){
+      appendLine(`\nUnknown class: "${arg}". Type "class ?" to see options.\n`);
+      return;
+    }
+
+    appendLine(`\nSpawning ${match}: ${jsonCmd[match]}\n`);
+    localStorage.setItem("playerClass", match);
+
+    if (window.gameAPI?.setClass) {
+      window.gameAPI.setClass(match);
+    }
+    return;
+
+    
+  }
  
   // JSON-defined commands
   if (cmdMap[lower]) {
